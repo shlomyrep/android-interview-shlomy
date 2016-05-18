@@ -92,7 +92,7 @@ public class MovieModel implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof MovieModel) {
             MovieModel other = (MovieModel) obj;
-            // Google Guava provides great utilities for equals too!
+            // Google Guava provides great utilities for equals
             return Objects.equal(movieId, other.movieId);
         } else {
             return false;

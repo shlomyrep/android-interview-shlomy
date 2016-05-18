@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity implements FragMovie_Grid.Fr
 
     @Override
     public void onDataLongClick() {
-        Intent intent = new Intent(MainActivity.this,FragMovie_Favorite.class);
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this,FragMovie_Favorite.class);
+//        startActivity(intent);
     }
 
     @Override
