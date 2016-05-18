@@ -45,6 +45,7 @@ public class YouTubeFragment extends YouTubePlayerSupportFragment implements You
     /**
      * Set the video id and initialize the player
      * This can be used when including the Fragment in an XML layout
+     *
      * @param videoId The ID of the video to play
      */
     public void setVideoId(final String videoId) {

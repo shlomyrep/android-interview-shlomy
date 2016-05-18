@@ -24,7 +24,7 @@
             android:taskAffinity=""
             android:theme="@style/Theme.Sliding.Light" />
         <activity
-            android:name="my.interview.example.FragMovie_Favorite"
+            android:name=".FragMovieFavorite"
             android:noHistory="true" />
         <activity android:name="my.interview.example.Trailer"></activity>
     </application>

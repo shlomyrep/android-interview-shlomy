@@ -10,16 +10,16 @@ import java.io.Serializable;
  */
 public class MovieModel implements Serializable {
 
-   private int id;
-   private long movieId;
-   private String movieName;
-   private String movieSynopsis;
-   private String releaseDate;
-   private double rate;
-   private String movieImage;
-   private String movieUrl;
-   private String movieTrailers;
-   private boolean isFavorite;
+    private int id;
+    private long movieId;
+    private String movieName;
+    private String movieSynopsis;
+    private String releaseDate;
+    private double rate;
+    private String movieImage;
+    private String movieUrl;
+    private String movieTrailers;
+    private boolean isFavorite;
 
 
     public boolean isFavorite() {
@@ -63,7 +63,7 @@ public class MovieModel implements Serializable {
     }
 
     public MovieModel(long movieId, String movieName, String movieSynopsis,
-                      String releaseDate, double rate, String movieImage, String movieUrl, String movieTrailers,boolean isFavorite) {
+                      String releaseDate, double rate, String movieImage, String movieUrl, String movieTrailers, boolean isFavorite) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieSynopsis = movieSynopsis;
@@ -74,8 +74,9 @@ public class MovieModel implements Serializable {
         this.movieTrailers = movieTrailers;
         this.isFavorite = isFavorite;
     }
-    public MovieModel(int id,long movieId, String movieName, String movieSynopsis,
-                      String releaseDate, double rate, String movieImage, String movieUrl, String movieTrailers,boolean isFavorite) {
+
+    public MovieModel(int id, long movieId, String movieName, String movieSynopsis,
+                      String releaseDate, double rate, String movieImage, String movieUrl, String movieTrailers, boolean isFavorite) {
         this.id = id;
         this.movieId = movieId;
         this.movieName = movieName;

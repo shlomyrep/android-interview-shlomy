@@ -14,7 +14,7 @@ public class Trailer extends AppCompatActivity {
         if (extras != null) {
             movieId = extras.getString("MOVIE_ID");
         }
-        if(movieId==null){
+        if (movieId == null) {
             finish();
             return;
         }

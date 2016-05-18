@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import my.interview.example.Process.AppHelper;
 import my.interview.example.Process.MovieModel;
 
 /**
@@ -25,63 +26,69 @@ public class DbHandler {
         mDb = mHelper.getWritableDatabase();
         return this;
     }
-    private void close(){
+
+    private void close() {
         mHelper.close();
     }
 
-    public void addMovie(MovieModel movie){
+    public void addMovie(MovieModel movie) {
         try {
             open();
             addSingleMovie(movie);
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
+        } catch (Exception e) {
+            AppHelper.Logger(e.toString());
+
+        } finally {
             close();
         }
     }
 
-    private void addSingleMovie(MovieModel movie){
+    private void addSingleMovie(MovieModel movie) {
         ContentValues cv = new ContentValues();
-        cv.put(DbConstant.MOVIE_ID , movie.getMovieId());
-        cv.put(DbConstant.MOVIE_NAME , movie.getMovieName());
-        cv.put(DbConstant.MOVIE_URL , movie.getMovieUrl());
+        cv.put(DbConstant.MOVIE_ID, movie.getMovieId());
+        cv.put(DbConstant.MOVIE_NAME, movie.getMovieName());
+        cv.put(DbConstant.MOVIE_URL, movie.getMovieUrl());
         cv.put(DbConstant.MOVIE_RELEASE_DATE, movie.getReleaseDate());
         cv.put(DbConstant.MOVIE_SYNOPSIS, movie.getMovieSynopsis());
-        cv.put(DbConstant.MOVIE_TRAILERS , movie.getMovieTrailers());
+        cv.put(DbConstant.MOVIE_TRAILERS, movie.getMovieTrailers());
         cv.put(DbConstant.MOVIE_IMAGE, movie.getMovieImage());
         cv.put(DbConstant.MOVIE_RATE, movie.getRate());
-        int isFavorite = movie.isFavorite()?1:0;
-        cv.put(DbConstant.FAVORITE,isFavorite);
-        mDb.insert(DbConstant.MOVIE_TABLE,null,cv);
+        int isFavorite = movie.isFavorite() ? 1 : 0;
+        cv.put(DbConstant.FAVORITE, isFavorite);
+        mDb.insert(DbConstant.MOVIE_TABLE, null, cv);
     }
 
-    public void markAsFavorite(int id , boolean favorite){
+    public void markAsFavorite(int id, boolean favorite) {
         try {
             open();
-            int isFavorite = favorite?1:0;
+            int isFavorite = favorite ? 1 : 0;
             ContentValues cv = new ContentValues();
             cv.put(DbConstant.FAVORITE, isFavorite);
-            mDb.update(DbConstant.MOVIE_TABLE, cv, DbConstant.ID+"="+id, null);
-        }catch (Exception e){}
-        finally {
+            mDb.update(DbConstant.MOVIE_TABLE, cv, DbConstant.ID + "=" + id, null);
+        } catch (Exception e) {
+            AppHelper.Logger(e.toString());
+
+        } finally {
             close();
         }
     }
 
-    public ArrayList<MovieModel> getFavoritesMovies(){
+    public ArrayList<MovieModel> getFavoritesMovies() {
         try {
             open();
-            Cursor c =  mDb.rawQuery("SELECT * FROM " + DbConstant.MOVIE_TABLE + " WHERE " + DbConstant.FAVORITE + " LIKE '" + 1 + "%' ", null);
+            Cursor c = mDb.rawQuery("SELECT * FROM " + DbConstant.MOVIE_TABLE + " WHERE " + DbConstant.FAVORITE + " LIKE '" + 1 + "%' ", null);
             return getData(c);
-        }catch (Exception e){}
-        finally {
+        } catch (Exception e) {
+            AppHelper.Logger(e.toString());
+
+        } finally {
             close();
         }
         return null;
     }
 
-    public void addMovies(ArrayList<MovieModel> list){
-        if(getMovies().contains(list)){
+    public void addMovies(ArrayList<MovieModel> list) {
+        if (getMovies().contains(list)) {
             return;
         }
         removeAll();
@@ -90,38 +97,42 @@ public class DbHandler {
             for (MovieModel m : list) {
                 addSingleMovie(m);
             }
-        }catch (Exception e){}
-        finally {
+        } catch (Exception e) {
+            AppHelper.Logger(e.toString());
+
+        } finally {
             close();
         }
     }
 
-    public void removeAll(){
+    public void removeAll() {
         try {
             open();
-            mDb.delete(DbConstant.MOVIE_TABLE,null,null);
-        }catch (Exception e){
-        }finally {
+            mDb.delete(DbConstant.MOVIE_TABLE, null, null);
+        } catch (Exception e) {
+            AppHelper.Logger(e.toString());
+        } finally {
             close();
         }
     }
 
-    public ArrayList<MovieModel> getMovies(){
+    public ArrayList<MovieModel> getMovies() {
         try {
             open();
-            Cursor cursor = mDb.query(DbConstant.MOVIE_TABLE, null , null ,null,null,null,null);
+            Cursor cursor = mDb.query(DbConstant.MOVIE_TABLE, null, null, null, null, null, null);
             return getData(cursor);
-        }catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            AppHelper.Logger(e.toString());
+
             return null;
-        }finally {
+        } finally {
             close();
         }
     }
 
-    private ArrayList<MovieModel> getData(Cursor c){
+    private ArrayList<MovieModel> getData(Cursor c) {
         ArrayList<MovieModel> list = new ArrayList<>();
-        while (c.moveToNext()){
+        while (c.moveToNext()) {
             MovieModel model = new MovieModel(
                     c.getInt(c.getColumnIndex(DbConstant.ID)),
                     c.getLong(c.getColumnIndex(DbConstant.MOVIE_ID)),
@@ -132,7 +143,7 @@ public class DbHandler {
                     c.getString(c.getColumnIndex(DbConstant.MOVIE_IMAGE)),
                     c.getString(c.getColumnIndex(DbConstant.MOVIE_URL)),
                     c.getString(c.getColumnIndex(DbConstant.MOVIE_TRAILERS)),
-                    c.getInt   (c.getColumnIndex(DbConstant.FAVORITE))==1);
+                    c.getInt(c.getColumnIndex(DbConstant.FAVORITE)) == 1);
             list.add(model);
         }
         return list;

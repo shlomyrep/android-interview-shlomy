@@ -23,7 +23,7 @@ public abstract class AbsBaseAdapter extends BaseAdapter {
     public AbsBaseAdapter(Activity mContext, ArrayList<MovieModel> mMovies) {
         this.mContext = mContext;
         this.mMovies = mMovies;
-        if(this.mMovies==null) {
+        if (this.mMovies == null) {
             this.mMovies = new ArrayList<>();
         }
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,16 +33,18 @@ public abstract class AbsBaseAdapter extends BaseAdapter {
     public int getCount() {
         return mMovies.size();
     }
+
     @Override
     public Object getItem(int position) {
         return position;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
     }
 
-    public static class ViewHolderItem{
+    public static class ViewHolderItem {
         TextView mTitle;
         ImageView mImage;
         ImageView mFavorite;

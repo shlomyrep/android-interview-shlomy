@@ -17,10 +17,11 @@ import my.interview.example.R;
 /**
  * Created by Nackson on 5/17/2016.
  */
-public class GetMovieRequest extends AsyncTask<Void,Void,ArrayList<MovieModel>> {
+public class GetMovieRequest extends AsyncTask<Void, Void, ArrayList<MovieModel>> {
 
-    public interface onLoadedFinished{
+    public interface onLoadedFinished {
         void onFinishLoadMovies(ArrayList<MovieModel> list);
+
         void noConnection();
     }
 
@@ -42,7 +43,7 @@ public class GetMovieRequest extends AsyncTask<Void,Void,ArrayList<MovieModel>> 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        if(!AppHelper.isNetworkAvailable(mContext) && mListener!=null) {
+        if (!AppHelper.isNetworkAvailable(mContext) && mListener != null) {
             mListener.noConnection();
             cancel(true);
         } else {
@@ -54,7 +55,7 @@ public class GetMovieRequest extends AsyncTask<Void,Void,ArrayList<MovieModel>> 
 
     @Override
     protected ArrayList<MovieModel> doInBackground(Void... params) {
-        if(isCancelled()){
+        if (isCancelled()) {
             return null;
         }
         String url = MovieDbApi.URL_TOP_RATED;
@@ -63,15 +64,16 @@ public class GetMovieRequest extends AsyncTask<Void,Void,ArrayList<MovieModel>> 
             return null;
         }
         try {
-             responseObject = new JSONObject(json);
+            responseObject = new JSONObject(json);
         } catch (JSONException e) {
-            e.printStackTrace();
+            AppHelper.Logger(e.toString());
+
         }
 
         try {
             return findMovies(responseObject);
         } catch (JSONException e) {
-            e.printStackTrace();
+            AppHelper.Logger(e.toString());
             return null;
         } //
     }
@@ -80,22 +82,24 @@ public class GetMovieRequest extends AsyncTask<Void,Void,ArrayList<MovieModel>> 
     @Override
     protected void onPostExecute(ArrayList<MovieModel> result) {
         super.onPostExecute(result);
-        if(result!=null && !result.isEmpty()){
-            if(mListener!=null){
+        if (result != null && !result.isEmpty()) {
+            if (mListener != null) {
                 mListener.onFinishLoadMovies(result);
             }
         }
-        if(mProgress!=null){
+        if (mProgress != null) {
             mProgress.dismiss();
         }
-        AppHelper.toggleOrientation(mContext , true);
+        AppHelper.toggleOrientation(mContext, true);
 
     }
 
 
     public ArrayList<MovieModel> findMovies(JSONObject responseObject) throws JSONException {
         JSONArray movies = responseObject.getJSONArray(MovieDbApi.JSON_KEYS.RESULTS);
-        if (movies.length() == 0) {return null;}
+        if (movies.length() == 0) {
+            return null;
+        }
 
         for (int i = 0; i < movies.length(); i++) {
             JSONObject movieJson = movies.getJSONObject(i);
@@ -114,7 +118,7 @@ public class GetMovieRequest extends AsyncTask<Void,Void,ArrayList<MovieModel>> 
 //            JSONObject  trailer = trailers.getJSONObject(0);
 //            String trailerKey = trailer.getString(MovieDbApi.JSON_KEYS.TRAILER_KEY);
 
-            mList.add(new MovieModel(id,title,synopsis,releaseDate,rate, MovieDbApi.IMAGE_URL + imageUrl,"","",false));
+            mList.add(new MovieModel(id, title, synopsis, releaseDate, rate, MovieDbApi.IMAGE_URL + imageUrl, "", "", false));
         }
 
         return mList;

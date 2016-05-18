@@ -14,7 +14,9 @@ import java.io.InputStreamReader;
 
 
 public class Parser {
-    public Parser() {}
+    public Parser() {
+    }
+
     public String getJsonDataFromUrl(String url) {
         HttpClient client = new DefaultHttpClient();
         HttpGet getRequest = new HttpGet(url);
@@ -35,9 +37,9 @@ public class Parser {
             //Create the json text
             return builder.toString();
         } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            AppHelper.Logger(e.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            AppHelper.Logger(e.toString());
         }
         return null;
     }

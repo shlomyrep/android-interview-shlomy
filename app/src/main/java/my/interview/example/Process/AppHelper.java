@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ public class AppHelper {
 
 
     public static final String SAVE_INSTANCE_LIST = "currentList";
+    public static final String TAG = "MovieDbLoggerExample";
 
 
     public static boolean isNetworkAvailable(Context mContext) {
@@ -25,7 +27,7 @@ public class AppHelper {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public static void displayImageGlide(Context mContext , String url, ImageView imageView) {
+    public static void displayImageGlide(Context mContext, String url, ImageView imageView) {
         Glide.with(mContext).load(url)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -36,8 +38,12 @@ public class AppHelper {
     public static void toggleOrientation(Context context, boolean enable) {
         if (!enable) {
             ((Activity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }else{
+        } else {
             ((Activity) context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
         }
+    }
+
+    public static void Logger(String exception) {
+        Log.i(TAG, exception);
     }
 }
