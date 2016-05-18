@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ShlomyInt</string>
+    <string name="app_name">MovieDb</string>
 
     <string name="loading">Loading Movies...</string>
     <string name="favoriteTitle">Favorite Movies</string>
