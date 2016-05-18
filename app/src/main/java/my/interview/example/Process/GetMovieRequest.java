@@ -30,14 +30,14 @@ public class GetMovieRequest extends AsyncTask<Void, Void, ArrayList<MovieModel>
     private ProgressDialog mProgress;
     private ArrayList<MovieModel> mList;
     private JSONObject responseObject;
-    private Parser mParser;
+    private Downloader mDownloader;
 
     public GetMovieRequest(Context mContext) {
         this.mContext = mContext;
         this.mListener = (onLoadedFinished) mContext;
         mProgress = new ProgressDialog(mContext);
         mList = new ArrayList<>();
-        mParser = new Parser();
+        mDownloader = new Downloader();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class GetMovieRequest extends AsyncTask<Void, Void, ArrayList<MovieModel>
             return null;
         }
         String url = MovieDbApi.URL_TOP_RATED;
-        String json = mParser.getJsonDataFromUrl(url);
+        String json = mDownloader.getJsonDataFromUrl(url);
         if (json == null) {
             return null;
         }
@@ -111,7 +111,7 @@ public class GetMovieRequest extends AsyncTask<Void, Void, ArrayList<MovieModel>
             String imageUrl = movieJson.getString(MovieDbApi.JSON_KEYS.POSTER_PATH);
 
 //            String videoUrl = String.format(MovieDbApi.VIDEO_URL, String.valueOf(id));
-//            String json = mParser.getJsonDataFromUrl(videoUrl);
+//            String json = mDownloader.getJsonDataFromUrl(videoUrl);
 //
 //            responseObject = new JSONObject(json);
 //            JSONArray trailers = responseObject.getJSONArray(MovieDbApi.JSON_KEYS.RESULTS);

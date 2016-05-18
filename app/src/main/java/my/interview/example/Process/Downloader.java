@@ -13,8 +13,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public class Parser {
-    public Parser() {
+public class Downloader {
+    public Downloader() {
     }
 
     public String getJsonDataFromUrl(String url) {

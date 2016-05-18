@@ -16,7 +16,6 @@ public class TrailerActivity extends AppCompatActivity {
         }
         if (movieId == null) {
             finish();
-            return;
         }
 
         YouTubeFragment fragment = (YouTubeFragment) getSupportFragmentManager().findFragmentById(my.interview.example.R.id.fragment_youtube);
