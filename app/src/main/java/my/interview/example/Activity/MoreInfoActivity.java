@@ -12,8 +12,6 @@ import com.klinker.android.sliding.SlidingActivity;
 import java.util.concurrent.ExecutionException;
 
 import my.interview.example.Database.DbHandler;
-import my.interview.example.FragMovieFavorite;
-import my.interview.example.FragMovieInfo;
 import my.interview.example.Process.AppHelper;
 import my.interview.example.Process.MovieModel;
 import my.interview.example.R;

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/fragment_youtube"
-        android:name="my.interview.example.YouTubeFragment"
+        android:name="my.interview.example.Activity.YouTubeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true" />

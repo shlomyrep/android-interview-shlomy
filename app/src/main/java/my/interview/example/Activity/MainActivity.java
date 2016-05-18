@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 
 import my.interview.example.Database.DbHandler;
-import my.interview.example.FragMovieGrid;
-import my.interview.example.FragMovieInfo;
 import my.interview.example.Process.GetMovieRequest;
 import my.interview.example.Process.MovieModel;
 import my.interview.example.R;

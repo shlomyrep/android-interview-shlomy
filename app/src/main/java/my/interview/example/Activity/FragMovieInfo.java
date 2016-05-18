@@ -1,4 +1,4 @@
-package my.interview.example;
+package my.interview.example.Activity;
 
 
 import android.annotation.SuppressLint;
@@ -76,7 +76,7 @@ public class FragMovieInfo extends Fragment {
             String finalRate = "<b>" + rate + "</b>/10";
             mRate.setText(Html.fromHtml(finalRate));
             mReleaseDate.setText(releaseDate);
-//            startActivity(new Intent(getActivity() , Trailer.class).putExtra("MOVIE_ID" , trailerId));
+//            startActivity(new Intent(getActivity() , TrailerActivity.class).putExtra("MOVIE_ID" , trailerId));
             AppHelper.displayImageGlide(getActivity(), imageUrl, imageView);
         } catch (Exception e) {
 

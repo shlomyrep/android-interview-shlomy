@@ -1,4 +1,4 @@
-package my.interview.example;
+package my.interview.example.Activity;
 
 
 import android.os.Bundle;
