@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/redColor</color>
+    <color name="colorPrimaryDark">@color/redColor</color>
+    <color name="colorAccent">@color/redColor</color>
+
+    <color name="redColor">#B71C1C</color>
+    <color name="movieInfoColor">#303030</color>
+    <color name="white">#ffffff</color>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ShlomyInt</string>
+
+    <string name="loading">Loading Movies...</string>
+    <string name="favoriteTitle">Favorite Movies</string>
+    <string name="DEVELOPER_KEY">AIzaSyCi4Ygr5QMsA6uGnT3GwNx75rrCSTFyymM</string>
+
+</resources>
