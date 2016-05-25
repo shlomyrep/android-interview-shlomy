@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.klinker.android.sliding.SlidingActivity;
 
 import java.util.concurrent.ExecutionException;
@@ -40,11 +41,13 @@ public class MoreInfoActivity extends SlidingActivity implements View.OnClickLis
             @Override
             public void run() {
                 try {
-                    theBitmap = Glide.
-                            with(MoreInfoActivity.this).
-                            load(data.getMovieImage()).
-                            asBitmap().
-                            into(100, 200). // Width and height
+                    theBitmap = Glide
+                            .with(MoreInfoActivity.this)
+                            .load(data.getMovieImage())
+                            .asBitmap()
+                            .skipMemoryCache(true)
+                            .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                            .into(100, 200). // Width and height
                             get();
                 } catch (InterruptedException e) {
                     AppHelper.Logger(e.toString());
