@@ -123,7 +123,6 @@ public class DbHandler {
             return getData(cursor);
         } catch (Exception e) {
             AppHelper.Logger(e.toString());
-
             return null;
         } finally {
             close();
@@ -132,20 +131,24 @@ public class DbHandler {
 
     private ArrayList<MovieModel> getData(Cursor c) {
         ArrayList<MovieModel> list = new ArrayList<>();
-        while (c.moveToNext()) {
-            MovieModel model = new MovieModel(
-                    c.getInt(c.getColumnIndex(DbConstant.ID)),
-                    c.getLong(c.getColumnIndex(DbConstant.MOVIE_ID)),
-                    c.getString(c.getColumnIndex(DbConstant.MOVIE_NAME)),
-                    c.getString(c.getColumnIndex(DbConstant.MOVIE_SYNOPSIS)),
-                    c.getString(c.getColumnIndex(DbConstant.MOVIE_RELEASE_DATE)),
-                    c.getDouble(c.getColumnIndex(DbConstant.MOVIE_RATE)),
-                    c.getString(c.getColumnIndex(DbConstant.MOVIE_IMAGE)),
-                    c.getString(c.getColumnIndex(DbConstant.MOVIE_URL)),
-                    c.getString(c.getColumnIndex(DbConstant.MOVIE_TRAILERS)),
-                    c.getInt(c.getColumnIndex(DbConstant.FAVORITE)) == 1);
-            list.add(model);
+        if (c.moveToFirst()){
+            do{
+                MovieModel model = new MovieModel(
+                        c.getInt(c.getColumnIndex(DbConstant.ID)),
+                        c.getLong(c.getColumnIndex(DbConstant.MOVIE_ID)),
+                        c.getString(c.getColumnIndex(DbConstant.MOVIE_NAME)),
+                        c.getString(c.getColumnIndex(DbConstant.MOVIE_SYNOPSIS)),
+                        c.getString(c.getColumnIndex(DbConstant.MOVIE_RELEASE_DATE)),
+                        c.getDouble(c.getColumnIndex(DbConstant.MOVIE_RATE)),
+                        c.getString(c.getColumnIndex(DbConstant.MOVIE_IMAGE)),
+                        c.getString(c.getColumnIndex(DbConstant.MOVIE_URL)),
+                        c.getString(c.getColumnIndex(DbConstant.MOVIE_TRAILERS)),
+                        c.getInt(c.getColumnIndex(DbConstant.FAVORITE)) == 1);
+                list.add(model);
+                // do what ever you want here
+            }while(c.moveToNext());
         }
+        c.close();
         return list;
     }
 

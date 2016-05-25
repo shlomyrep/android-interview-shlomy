@@ -15,7 +15,7 @@ import my.interview.example.R;
 
 public class MainActivity extends AppCompatActivity implements FragMovieGrid.FragmentConnection, GetMovieRequest.onLoadedFinished {
 
-    GetMovieRequest mMovieRequest;
+    private GetMovieRequest mMovieRequest;
     private DbHandler mDb;
 
     @Override
@@ -55,14 +55,14 @@ public class MainActivity extends AppCompatActivity implements FragMovieGrid.Fra
 
     @Override
     public void onFinishLoadMovies(ArrayList<MovieModel> list) {
-        ArrayList<MovieModel> temp = mDb.getMovies();
+        ArrayList<MovieModel> dbMovieList = mDb.getMovies();
         for (MovieModel movieModel : list) {
-            if (!temp.contains(movieModel)) {
+            if (!dbMovieList.contains(movieModel)) {
                 mDb.addMovie(movieModel);
+                dbMovieList.add(movieModel);
             }
         }
-        list = mDb.getMovies();
-        getFragmentManager().beginTransaction().add(R.id.container_grid_view, FragMovieGrid.getInstance(list)).commit();
+        getFragmentManager().beginTransaction().add(R.id.container_grid_view, FragMovieGrid.getInstance(dbMovieList)).commit();
     }
 
     @Override
