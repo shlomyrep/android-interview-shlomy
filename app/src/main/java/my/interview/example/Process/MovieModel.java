@@ -10,7 +10,8 @@ import java.io.Serializable;
  */
 public class MovieModel implements Serializable {
 
-    private int id;
+
+    private long id;
     private long movieId;
     private String movieName;
     private String movieSynopsis;
@@ -26,9 +27,14 @@ public class MovieModel implements Serializable {
         return isFavorite;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 
     public long getMovieId() {
         return movieId;

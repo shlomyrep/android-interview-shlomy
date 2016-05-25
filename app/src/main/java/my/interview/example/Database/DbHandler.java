@@ -31,19 +31,20 @@ public class DbHandler {
         mHelper.close();
     }
 
-    public void addMovie(MovieModel movie) {
+    public long addMovie(MovieModel movie) {
         try {
             open();
-            addSingleMovie(movie);
+            return addSingleMovie(movie);
         } catch (Exception e) {
             AppHelper.Logger(e.toString());
 
         } finally {
             close();
         }
+        return 0;
     }
 
-    private void addSingleMovie(MovieModel movie) {
+    private long addSingleMovie(MovieModel movie) {
         ContentValues cv = new ContentValues();
         cv.put(DbConstant.MOVIE_ID, movie.getMovieId());
         cv.put(DbConstant.MOVIE_NAME, movie.getMovieName());
@@ -55,10 +56,11 @@ public class DbHandler {
         cv.put(DbConstant.MOVIE_RATE, movie.getRate());
         int isFavorite = movie.isFavorite() ? 1 : 0;
         cv.put(DbConstant.FAVORITE, isFavorite);
-        mDb.insert(DbConstant.MOVIE_TABLE, null, cv);
+        long id = mDb.insert(DbConstant.MOVIE_TABLE, null, cv);
+        return id;
     }
 
-    public void markAsFavorite(int id, boolean favorite) {
+    public void markAsFavorite(long id, boolean favorite) {
         try {
             open();
             int isFavorite = favorite ? 1 : 0;

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements FragMovieGrid.Fra
         ArrayList<MovieModel> dbMovieList = mDb.getMovies();
         for (MovieModel movieModel : list) {
             if (!dbMovieList.contains(movieModel)) {
-                mDb.addMovie(movieModel);
+                movieModel.setId(mDb.addMovie(movieModel));
                 dbMovieList.add(movieModel);
             }
         }
